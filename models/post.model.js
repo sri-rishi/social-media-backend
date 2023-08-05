@@ -21,7 +21,7 @@ const PostSchema = mongoose.Schema(
     },
     desc: String,
     likes: {
-      likedBy: String,
+      likedBy: [],
       likeCount: Number
     },
     image: String,

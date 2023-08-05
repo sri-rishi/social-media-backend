@@ -4,6 +4,15 @@ const mongoose = require("mongoose");
 const axios = require("axios");
 const CronJob = require("cron").CronJob;
 
+const getAllPosts = async (req, res) => {
+  try {
+    const posts = await PostModel.find();
+    res.status(200).json({ posts })
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}
+
 // Create new Post 
 const createPost = async (req, res) => {
   const newPost = new PostModel(req.body);
@@ -12,7 +21,7 @@ const createPost = async (req, res) => {
     await newPost.save();
     res.status(200).json(newPost);
   } catch (error) {
-    res.status(500).json(error)
+    res.status(500).json(error);
   }
 }
 
@@ -218,4 +227,4 @@ const deleteComment = async (req, res) => {
   }
 }
 
-module.exports = { createPost, getSinglePost, updatePost, deletePost, likePost, getTimelinePosts, createComment, deleteComment, sharePost }
+module.exports = { getAllPosts, createPost, getSinglePost, updatePost, deletePost, likePost, getTimelinePosts, createComment, deleteComment, sharePost }
